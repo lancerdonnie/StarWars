@@ -22,6 +22,7 @@ module.exports = {
       },
       fontFamily: {
         orb: ['orbitron'],
+        meg: ['Megrim'],
         mont: ['Montserrat'],
         space: ['Space Mono'],
       },
