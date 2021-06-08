@@ -1,5 +1,7 @@
+import { motion, AnimatePresence } from 'framer-motion';
 import Head from 'next/head';
-import Link from 'next/link';
+import { useState } from 'react';
+import Movies from 'components/Movies';
 
 export default function Index() {
   return (
@@ -18,13 +20,27 @@ export default function Index() {
   );
 }
 
+const variants = { show: { top: 0 } };
+
 const Choose = () => {
+  const [show, setShow] = useState(false);
+  const handleClick = () => setShow((s) => !s);
+  const show2 = show ? '' : 'hover:brightness-75';
+
   return (
-    <Link href="/movies">
-      <div className="choose absolute bottom-0 px-2 py-1 cursor-pointer bg-alt filter hover:brightness-75 transition duration-300 ease-in-out flex items-center">
+    <motion.div
+      variants={variants}
+      animate={show ? 'show' : ''}
+      className={`choose top-[calc(100vh-32px)] h-screen w-full fixed flex flex-col items-center`}
+    >
+      <div
+        onClick={handleClick}
+        className={`${show2} flex items-center px-2 py-1 cursor-pointer bg-alt filter transition duration-300 ease-in-out`}
+      >
         <span>Choose a star wars movie</span>
         <span className="material-icons">arrow_drop_down</span>
       </div>
-    </Link>
+      <AnimatePresence>{show && <Movies />}</AnimatePresence>
+    </motion.div>
   );
 };
