@@ -1,13 +1,5 @@
-import type { Character } from 'utils/types';
-import { ChangeEventHandler, useEffect } from 'react';
-
 import { motion } from 'framer-motion';
-import { useQueries } from 'react-query';
-import useStore from 'utils/store';
-import { useState } from 'react';
-
-type SortColumn = 'name' | 'gender' | 'height' | null;
-type SortState = 'asc' | 'desc' | null;
+import useMovie from './useMovie';
 
 const feetDivisible = 30.48;
 const inchDivisible = 2.54;
@@ -26,32 +18,6 @@ const getTotalHeight = (cmValue: number) => {
   return `${cmValue} cm (${feet}ft/${inches}in)`;
 };
 
-const sortAlgo = (
-  data: (Character | undefined)[],
-  column: SortColumn,
-  state: SortState
-): (Character | undefined)[] => {
-  if (data.some((e) => e === undefined) || column === null) return data;
-  const temp = [...data] as Character[];
-  if (column === 'height') {
-    if (state === 'asc') {
-      return temp.sort((a, b) => parseInt(a[column]) - parseInt(b[column]));
-    }
-    if (state === 'desc') {
-      return temp.sort((a, b) => parseInt(b[column]) - parseInt(a[column]));
-    }
-    return temp;
-  }
-  // console.log(column, state);
-  if (state === 'asc') {
-    return temp.sort((a, b) => (a[column] > b[column] ? 1 : -1));
-  }
-  if (state === 'desc') {
-    return temp.sort((a, b) => (a[column] < b[column] ? 1 : -1));
-  }
-  return temp;
-};
-
 const getGender = (gender: string) => {
   switch (gender) {
     case 'male':
@@ -66,65 +32,37 @@ const getGender = (gender: string) => {
 };
 
 export default function Movie() {
-  const setMovieOpen = useStore((state) => state.setMovieOpen);
-  const movie = useStore((state) => state.movie);
-
-  const [genderFilter, setGenderFilter] = useState('All');
-  const [sortColumn, setSortColumn] = useState<SortColumn>(null);
-  const [sortState, setSortState] = useState<SortState>(null);
-
-  // useEffect(() => {
-  //   if (sortColumn !== null) setSortState('asc');
-  // }, [sortColumn]);
-
-  const queries = useQueries(
-    (movie?.characters ?? []).map((user) => ({ queryKey: [user] }))
-  );
-
-  const isLoading = queries.some((e) => e.isLoading);
-  const error = queries.some((e) => e.error);
-  const genders = [
-    ...new Set(queries.map((e) => (e.data as Character)?.gender)),
-  ];
-
-  let filteredQueries = queries
-    .map((e) => e.data as Character | undefined)
-    .filter((e) => genderFilter === 'All' || e?.gender === genderFilter);
-
-  const characterCount = filteredQueries.length;
-  const characterHeightSum = filteredQueries.reduce((a, e) => {
-    a = a + parseInt(e?.height ?? '0');
-    return a;
-  }, 0);
-
-  const handleGenderFilterChange: ChangeEventHandler<HTMLSelectElement> = (
-    e
-  ) => {
-    setGenderFilter(e.target.value);
-  };
-
-  const handleSort = (column: NonNullable<SortColumn>) => () => {
-    if (column === sortColumn && sortState === 'desc') {
-      setSortColumn(null);
-      setSortState(null);
-      return;
-    }
-    if (column === sortColumn && sortState === 'asc')
-      return setSortState('desc');
-    if (column === sortColumn) return setSortState('asc');
-    setSortColumn(column);
-    setSortState('asc');
-  };
-
-  let filteredSortedQueries = sortAlgo(filteredQueries, sortColumn, sortState);
+  const {
+    isLoading,
+    error,
+    filteredSortedQueries,
+    handleSort,
+    handleGenderFilterChange,
+    characterCount,
+    characterHeightSum,
+    genders,
+    setMovieOpen,
+    movie,
+    genderFilter,
+    sortState,
+    sortColumn,
+  } = useMovie();
 
   return (
     <motion.div
       animate={{ left: 0 }}
       exit={{ left: '100%' }}
       transition={{ duration: 0.5 }}
-      className="h-screen w-screen bg-main text-white absolute inset-0 left-full overflow-hidden flex flex-col"
+      // style={{ backgroundImage: `url("/moviebg.jpg")` }}
+      className="h-screen w-screen z-0 bg-main text-white absolute inset-0 left-full overflow-hidden flex flex-col"
     >
+      {/* <img src="/moviebg.jpg" /> */}
+      {/* <Image
+        className="absolute inset-0 z-[-1]"
+        layout="fill"
+        objectFit="cover"
+        src="/moviebg.jpg"
+      /> */}
       <div
         className="flex items-center p-3 cursor-pointer"
         onClick={() => setMovieOpen(false)}
@@ -158,6 +96,7 @@ export default function Movie() {
               </select>
             </div>
             <div className="mt-8">
+              <div className="material-icons">sort</div>
               <div className="grid grid-cols-10 border-b p-4 border-alt-3 cursor-pointer">
                 <div
                   onClick={handleSort('name')}
