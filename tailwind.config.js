@@ -6,11 +6,12 @@ module.exports = {
     extend: {
       colors: {
         main: {
-          DEFAULT: 'black',
+          DEFAULT: '#000',
         },
         alt: {
-          DEFAULT: 'yellow',
-          2: '#5c1ed6',
+          DEFAULT: '#FFFF00',
+          2: '#494900',
+          3: '#373700',
         },
       },
       screens: {
@@ -23,8 +24,8 @@ module.exports = {
       fontFamily: {
         orb: ['orbitron'],
         meg: ['Megrim'],
-        mont: ['Montserrat'],
-        space: ['Space Mono'],
+        // mont: ['Montserrat'],
+        // space: ['Space Mono'],
       },
       // fontSize: {
       //   md: '14px',

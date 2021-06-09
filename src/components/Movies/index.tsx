@@ -1,27 +1,7 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 import { BASE_URL } from 'utils/constants';
-
-interface Result {
-  characters: string[]; //url
-  created: string; //datetime
-  director: string;
-  edited: string; //datetime
-  episode_id: number;
-  opening_crawl: string;
-  planets: string[];
-  producer: string;
-  release_date: string; //date
-  species: string[]; //url
-  starships: string[]; //url
-  title: string;
-  url: string;
-  vehicles: string[]; //url
-}
-
-interface Movie {
-  results: Result[];
-}
+import type { Movie } from 'utils/types';
 
 export default function Movies() {
   const { data } = useQuery<Movie>(BASE_URL + 'films/');

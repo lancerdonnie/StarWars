@@ -18,6 +18,7 @@ body {
   /* font-family: 'Londrina Sketch', cursive; */
   font-family: 'orbitron';
   background-color: black;
+  overflow: hidden;
 }
 
 a {
@@ -27,6 +28,10 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+li {
+  list-style-type: none;
 }
 
 .logo div:first-child {
