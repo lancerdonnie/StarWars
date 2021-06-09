@@ -39,7 +39,15 @@ const Choose = () => {
   const handleClick = () => setOptionsOpen(!isOptionsOpen);
   const show2 = isOptionsOpen ? '' : 'hover:brightness-75';
 
-  const { data, isLoading, error } = useQuery<Movie>(BASE_URL + 'films/');
+  const { data, isLoading, error } = useQuery<Movie>(BASE_URL + 'films/', {
+    select: (data) => {
+      const x = { ...data };
+      x.results.sort(
+        (a, b) => +new Date(a.release_date) - +new Date(b.release_date)
+      );
+      return x;
+    },
+  });
 
   return (
     <motion.div

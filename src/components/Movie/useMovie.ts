@@ -5,8 +5,8 @@ import { useState } from 'react';
 import { useQueries } from 'react-query';
 import useStore from 'utils/store';
 
-type SortColumn = 'name' | 'gender' | 'height' | null;
-type SortState = 'asc' | 'desc' | null;
+export type SortColumn = 'name' | 'gender' | 'height' | null;
+export type SortState = 'asc' | 'desc' | null;
 
 const sortAlgo = (
   data: (Character | undefined)[],
@@ -37,7 +37,7 @@ const useMovie = () => {
   const setMovieOpen = useStore((state) => state.setMovieOpen);
   const movie = useStore((state) => state.movie);
 
-  const [genderFilter, setGenderFilter] = useState('All');
+  const [genderFilter, setGenderFilter] = useState('Select');
   const [sortColumn, setSortColumn] = useState<SortColumn>(null);
   const [sortState, setSortState] = useState<SortState>(null);
 
@@ -53,7 +53,12 @@ const useMovie = () => {
 
   let filteredQueries = queries
     .map((e) => e.data as Character | undefined)
-    .filter((e) => genderFilter === 'All' || e?.gender === genderFilter);
+    .filter(
+      (e) =>
+        genderFilter === 'All' ||
+        genderFilter === 'Select' ||
+        e?.gender === genderFilter
+    );
 
   const characterCount = filteredQueries.length;
   const characterHeightSum = filteredQueries.reduce((a, e) => {

@@ -12,6 +12,7 @@ module.exports = {
           DEFAULT: '#FFFF00',
           2: '#494900',
           3: '#373700',
+          // 4: '#DBDB00',
         },
       },
       screens: {
@@ -24,7 +25,7 @@ module.exports = {
       fontFamily: {
         orb: ['orbitron'],
         meg: ['Megrim'],
-        // mont: ['Montserrat'],
+        mont: ['Montserrat'],
         // space: ['Space Mono'],
       },
       // fontSize: {
