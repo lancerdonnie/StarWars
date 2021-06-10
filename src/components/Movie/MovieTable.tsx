@@ -10,7 +10,7 @@ interface Props {
   filteredSortedQueries: (Character | undefined)[];
   characterCount: number;
   characterHeightSum: number;
-  handleSort: (column: NonNullable<SortColumn>) => any;
+  handleSort: (column: NonNullable<SortColumn>) => () => void;
   sortState: SortState;
   sortColumn: SortColumn;
 }

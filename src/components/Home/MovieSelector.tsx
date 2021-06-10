@@ -25,7 +25,7 @@ const MovieSelector = () => {
     <motion.div
       animate={{ bottom: 0, opacity: 1 }}
       transition={{ delay: 1.1, duration: 0.5 }}
-      className={`bottom-[-31px] absolute opacity-0 flex items-center`}
+      className={`bottom-[-31px] absolute opacity-0 text-lg flex items-center`}
     >
       <div
         onClick={handleClick}

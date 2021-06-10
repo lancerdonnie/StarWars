@@ -8,7 +8,7 @@ const variants = {
     bottom: -100,
   },
   in: {
-    bottom: 32,
+    bottom: 37,
     transition: {
       staggerChildren: 0.07,
       staggerDirection: -1,

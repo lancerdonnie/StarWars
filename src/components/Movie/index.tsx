@@ -25,9 +25,9 @@ export default function Movie() {
     <motion.div
       layout
       animate={{ left: 0 }}
-      exit={{ left: '100%' }}
+      exit={{ left: '100vw' }}
       transition={{ duration: 0.4 }}
-      className="h-full w-full bg-main text-white absolute inset-0 left-full "
+      className="h-screen w-screen bg-main text-white absolute inset-0 left-full "
     >
       <Image
         className="absolute inset-0 opacity-50"
