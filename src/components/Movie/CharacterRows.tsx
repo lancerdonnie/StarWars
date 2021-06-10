@@ -1,5 +1,6 @@
-import { motion } from 'framer-motion';
 import type { Character } from 'utils/types';
+
+import { motion } from 'framer-motion';
 
 const getGender = (gender: string) => {
   switch (gender) {

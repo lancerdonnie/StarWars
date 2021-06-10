@@ -1,9 +1,8 @@
 import Image from 'next/image';
-
-import { AnimatePresence, motion } from 'framer-motion';
 import MovieTable from './MovieTable';
-import useMovie from './useMovie';
 import GenderSelect from './GenderSelect';
+import useMovie from './useMovie';
+import { AnimatePresence, motion } from 'framer-motion';
 
 export default function Movie() {
   const {
@@ -24,6 +23,7 @@ export default function Movie() {
 
   return (
     <motion.div
+      layout
       animate={{ left: 0 }}
       exit={{ left: '100%' }}
       transition={{ duration: 0.4 }}
@@ -33,7 +33,7 @@ export default function Movie() {
         className="absolute inset-0 opacity-50"
         layout="fill"
         objectFit="cover"
-        src="/moviebg2.jpg"
+        src="/moviebg.jpg"
       />
       <div className="movie relative h-full overflow-auto overflow-x-hidden flex flex-col">
         <div
@@ -56,7 +56,7 @@ export default function Movie() {
                     initial={{ opacity: 0, y: 50 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.5 }}
-                    className="text-4xl"
+                    className="text-3xl"
                   >
                     {movie?.title}
                   </motion.div>
@@ -109,7 +109,7 @@ const Spinner = () => {
           <Image src="/load.png" height="64" width="64" />
         </motion.div>
         <div className="absolute -bottom-16 w-screen text-center">
-          Loading Galactic data...
+          Loading Interstellar data...
         </div>
       </div>
     </div>

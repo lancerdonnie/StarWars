@@ -56,11 +56,11 @@ select {
 }
 
 .logo div:first-child {
-  transform: translateX(-100vw);
-  animation-name: left;
+  /* transform: translateX(-100vw); */
+  /* animation-name: left;
   animation-duration: 1s;
   animation-timing-function: ease-in;
-  animation-fill-mode: forwards;
+  animation-fill-mode: forwards; */
 }
 
 .logo div:last-child {
@@ -84,5 +84,8 @@ select {
 @media (max-width: 640px) {
   body {
     font-size: 11px;
+  }
+  .movie::-webkit-scrollbar {
+    width: 0;
   }
 }

@@ -1,22 +1,20 @@
-import { motion } from 'framer-motion';
 import type { Result } from 'utils/types';
+
 import Option from './Option';
+import { motion } from 'framer-motion';
 
 const variants = {
-  ab: {
+  start: {
     bottom: -100,
   },
-  abc: {
+  in: {
     bottom: 32,
     transition: {
       staggerChildren: 0.07,
       staggerDirection: -1,
-      // delayChildren: 1,
-      // when: 'beforeChildren',
-      // when: 'afterChildren',
     },
   },
-  abcd: {
+  end: {
     bottom: -150,
     transition: { staggerChildren: 0.05, when: 'afterChildren' },
   },
@@ -26,9 +24,9 @@ const Options = ({ data }: { data: Result[] }) => {
   return (
     <motion.ul
       variants={variants}
-      initial="ab"
-      animate="abc"
-      exit="abcd"
+      initial="start"
+      animate="in"
+      exit="end"
       className="z-[-1] absolute w-full text-center"
     >
       {data.map((e, i) => {

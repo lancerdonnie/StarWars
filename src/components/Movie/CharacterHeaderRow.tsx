@@ -1,5 +1,6 @@
-import { motion } from 'framer-motion';
 import type { SortColumn, SortState } from './useMovie';
+
+import { motion } from 'framer-motion';
 
 interface CharacterHeaderRowProps {
   handleSort: (column: NonNullable<SortColumn>) => any;
@@ -10,7 +11,7 @@ interface CharacterHeaderRowProps {
 const variants = {
   init: { opacity: 0, y: 100 },
   done: {
-    opacity: 1,
+    opacity: 0.6,
     y: 0,
     transition: { staggerChildren: 0.3, delayChildren: 1.3 },
   },
@@ -24,7 +25,7 @@ const CharacterHeaderRow = ({
   return (
     <motion.div
       variants={variants}
-      className="grid grid-cols-10 border-b p-4 border-alt-3 cursor-pointer opacity-60 font-orb"
+      className="grid grid-cols-10 border-b p-4 border-alt-3 cursor-pointer font-orb"
     >
       <div
         onClick={handleSort('name')}
@@ -51,7 +52,7 @@ const CharacterHeaderRow = ({
       </div>
       <div
         onClick={handleSort('height')}
-        className="col-start-9 col-end-11  flex items-center justify-center"
+        className="col-start-9 col-end-11 flex items-center justify-center text-center"
       >
         <span>HEIGHT (CM)</span>
         {sortState && sortColumn === 'height' && (

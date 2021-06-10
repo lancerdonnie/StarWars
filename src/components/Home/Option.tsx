@@ -1,7 +1,6 @@
 import type { Result } from 'utils/types';
 
 import { motion } from 'framer-motion';
-import React from 'react';
 import useStore from 'utils/store';
 
 interface Props {
@@ -9,9 +8,9 @@ interface Props {
 }
 
 const variants = {
-  ab: { opacity: 0 },
-  abc: { opacity: 1, transition: { y: { stiffness: 1000, velocity: -100 } } },
-  abcd: { opacity: 0, transition: { y: { stiffness: 1000 } } },
+  start: { opacity: 0 },
+  in: { opacity: 1, transition: { y: { stiffness: 1000, velocity: -100 } } },
+  end: { opacity: 0, transition: { y: { stiffness: 1000 } } },
 };
 
 const Option = ({ result }: Props) => {
@@ -27,7 +26,7 @@ const Option = ({ result }: Props) => {
   return (
     <motion.li
       onClick={handleClick}
-      className="text-white cursor-pointer bg-alt-3 hover:bg-main transition duration-300 ease-in-out"
+      className="text-white py-2 cursor-pointer bg-alt-3 hover:bg-main transition duration-300 ease-in-out"
       variants={variants}
     >
       {result.title}

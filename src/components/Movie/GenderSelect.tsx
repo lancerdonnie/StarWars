@@ -1,5 +1,6 @@
-import { motion } from 'framer-motion';
 import type { ChangeEventHandler } from 'react';
+
+import { motion } from 'framer-motion';
 
 interface GenderSelectProps {
   genderFilter: string;
