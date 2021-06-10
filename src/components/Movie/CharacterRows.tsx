@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import type { Character } from 'utils/types';
 
 const getGender = (gender: string) => {
@@ -15,6 +16,11 @@ const getGender = (gender: string) => {
   }
 };
 
+const variants = {
+  init: { opacity: 0, y: 50, x: 50 },
+  done: { opacity: 1, y: 0, x: 0 },
+};
+
 const CharacterRows = ({
   filteredSortedQueries,
 }: {
@@ -23,7 +29,8 @@ const CharacterRows = ({
   return (
     <>
       {filteredSortedQueries.map((e) => (
-        <div
+        <motion.div
+          variants={variants}
           key={e?.url}
           className="grid grid-cols-10 border-b p-4 border-alt-3 text-sm"
         >
@@ -32,7 +39,7 @@ const CharacterRows = ({
             {getGender(e?.gender ?? '')}
           </div>
           <div className="col-start-9 col-end-11 text-center">{e?.height}</div>
-        </div>
+        </motion.div>
       ))}
     </>
   );

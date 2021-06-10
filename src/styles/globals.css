@@ -80,3 +80,9 @@ select {
   animation-fill-mode: forwards;
   animation-delay: 2.1s;
 }
+
+@media (max-width: 640px) {
+  body {
+    font-size: 11px;
+  }
+}

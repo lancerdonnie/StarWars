@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import MovieTable from './MovieTable';
 import useMovie from './useMovie';
 import GenderSelect from './GenderSelect';
@@ -35,7 +35,7 @@ export default function Movie() {
         objectFit="cover"
         src="/moviebg2.jpg"
       />
-      <div className="movie relative h-full overflow-auto flex flex-col">
+      <div className="movie relative h-full overflow-auto overflow-x-hidden flex flex-col">
         <div
           className="flex items-center p-3 cursor-pointer sticky top-0 bg-main opacity-70"
           onClick={() => setMovieOpen(false)}
@@ -44,33 +44,47 @@ export default function Movie() {
           Back
         </div>
         <div className="p-4 h-full">
-          {isLoading ? (
-            <Spinner />
-          ) : error ? (
-            <ErrorComp />
-          ) : (
-            <>
-              <div>
-                <div className="text-4xl">{movie?.title}</div>
-                <div className="mt-6 font-mont text-justify tracking-wide">
-                  {movie?.opening_crawl}
+          <AnimatePresence>
+            {isLoading ? (
+              <Spinner />
+            ) : error ? (
+              <ErrorComp />
+            ) : (
+              <>
+                <div>
+                  <motion.div
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.5 }}
+                    className="text-4xl"
+                  >
+                    {movie?.title}
+                  </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.8, duration: 0.8 }}
+                    className="mt-6 font-mont text-justify tracking-wide"
+                  >
+                    {movie?.opening_crawl}
+                  </motion.div>
                 </div>
-              </div>
-              <GenderSelect
-                genderFilter={genderFilter}
-                handleGenderFilterChange={handleGenderFilterChange}
-                genders={genders}
-              />
-              <MovieTable
-                handleSort={handleSort}
-                sortState={sortState}
-                sortColumn={sortColumn}
-                filteredSortedQueries={filteredSortedQueries}
-                characterCount={characterCount}
-                characterHeightSum={characterHeightSum}
-              />
-            </>
-          )}
+                <GenderSelect
+                  genderFilter={genderFilter}
+                  handleGenderFilterChange={handleGenderFilterChange}
+                  genders={genders}
+                />
+                <MovieTable
+                  handleSort={handleSort}
+                  sortState={sortState}
+                  sortColumn={sortColumn}
+                  filteredSortedQueries={filteredSortedQueries}
+                  characterCount={characterCount}
+                  characterHeightSum={characterHeightSum}
+                />
+              </>
+            )}
+          </AnimatePresence>
         </div>
       </div>
     </motion.div>

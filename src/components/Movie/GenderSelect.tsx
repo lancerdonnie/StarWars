@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import type { ChangeEventHandler } from 'react';
 
 interface GenderSelectProps {
@@ -11,7 +12,12 @@ const GenderSelect = ({
   genders,
 }: GenderSelectProps) => {
   return (
-    <div className="mt-10 font-mont">
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.8, duration: 0.8 }}
+      className="mt-10 font-mont"
+    >
       <select
         className="bg-[#DBDB00] text-main uppercase p-2 px-4 cursor-pointer"
         value={genderFilter}
@@ -27,7 +33,7 @@ const GenderSelect = ({
           </option>
         ))}
       </select>
-    </div>
+    </motion.div>
   );
 };
 

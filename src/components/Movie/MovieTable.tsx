@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import type { Character } from 'utils/types';
 import CharacterHeaderRow from './CharacterHeaderRow';
 import CharacterRows from './CharacterRows';
@@ -29,6 +30,15 @@ interface Props {
   sortColumn: SortColumn;
 }
 
+const variants = {
+  init: { opacity: 0, y: 100 },
+  done: {
+    opacity: 1,
+    y: 0,
+    transition: { staggerChildren: 0.3, delayChildren: 1.3 },
+  },
+};
+
 const MovieTable = ({
   handleSort,
   sortState,
@@ -38,20 +48,29 @@ const MovieTable = ({
   characterHeightSum,
 }: Props) => {
   return (
-    <div className="mt-8 font-mont">
+    <motion.div
+      variants={variants}
+      initial="init"
+      animate="done"
+      transition={{ delay: 1.2, duration: 0.8 }}
+      className="mt-8 font-mont"
+    >
       <CharacterHeaderRow
         handleSort={handleSort}
         sortState={sortState}
         sortColumn={sortColumn}
       />
       <CharacterRows filteredSortedQueries={filteredSortedQueries} />
-      <div className="grid grid-cols-10 border-b p-4 border-alt-3 opacity-60">
+      <motion.div
+        variants={variants}
+        className="grid grid-cols-10 border-b p-4 border-alt-3 opacity-60"
+      >
         <div className="col-span-5">No of characters: {characterCount}</div>
         <div className="col-start-6 col-end-11 text-right">
           Total height: {getTotalHeight(characterHeightSum)}
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 
