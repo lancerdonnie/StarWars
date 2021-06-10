@@ -62,7 +62,7 @@ const useMovie = () => {
 
   const characterCount = filteredQueries.length;
   const characterHeightSum = filteredQueries.reduce((a, e) => {
-    a = a + parseInt(e?.height ?? '0');
+    a = a + (!isNaN(e?.height as unknown as number) ? parseInt(e!.height) : 0);
     return a;
   }, 0);
 

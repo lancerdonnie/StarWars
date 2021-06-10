@@ -43,11 +43,11 @@ export default function Movie() {
           <span className="material-icons">arrow_back_ios</span>
           Back
         </div>
-        <div className="p-4">
+        <div className="p-4 h-full">
           {isLoading ? (
-            <div>loading</div>
+            <Spinner />
           ) : error ? (
-            <div>error</div>
+            <ErrorComp />
           ) : (
             <>
               <div>
@@ -76,3 +76,38 @@ export default function Movie() {
     </motion.div>
   );
 }
+
+const Spinner = () => {
+  return (
+    <div className="h-full flex items-center justify-center">
+      <div className="relative flex items-center justify-center">
+        <motion.div
+          animate={{
+            scale: [1, 2, 2, 1, 1],
+            rotate: [0, 0, 270, 270, 0],
+            transition: {
+              repeat: Infinity,
+              duration: 3,
+              restDelta: 0.5,
+            },
+          }}
+        >
+          <Image src="/load.png" height="64" width="64" />
+        </motion.div>
+        <div className="absolute -bottom-16 w-screen text-center">
+          Loading Galactic data...
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const ErrorComp = () => {
+  return (
+    <div className="h-full w-full flex flex-col items-center justify-center">
+      <Image src="/error.png" height="128" width="128" />
+      <div className="mt-10">Oops.. error fetching data</div>
+      <div>Darth Vadar has destroyed the Galactic Empire</div>
+    </div>
+  );
+};
