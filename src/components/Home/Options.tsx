@@ -27,7 +27,7 @@ const Options = ({ data }: { data: Result[] }) => {
       initial="start"
       animate="in"
       exit="end"
-      className="z-[-1] absolute w-full text-center"
+      className="absolute w-full text-center"
     >
       {data.map((e, i) => {
         return <Option key={i} result={e} />;

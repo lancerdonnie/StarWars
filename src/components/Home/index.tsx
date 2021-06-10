@@ -3,18 +3,9 @@ import { motion } from 'framer-motion';
 
 const Home = () => {
   return (
-    <div className="h-full relative flex justify-center items-center">
-      <div className="logo flex flex-col text-alt font-meg text-9xl sm:text-8xl tracking-widest font-bold">
-        {/* <Title text="STAR" from="left" /> */}
-        <motion.div
-          initial={{ x: '0px', position: 'relative' }}
-          animate={{ x: '100px', position: 'relative' }}
-          // transition={{ delay: 10 }}
-          // transition={{ duration: 5 }}
-          className="text-center "
-        >
-          star
-        </motion.div>
+    <div className="h-screen relative flex justify-center items-center">
+      <div className="flex flex-col text-alt font-meg text-9xl sm:text-8xl tracking-widest font-bold">
+        <Title text="STAR" from="left" />
         <Title text="WARS" from="right" />
       </div>
       <MovieSelector />
@@ -28,22 +19,18 @@ interface TitleProps {
 }
 
 const variants = {
-  init: { x: -500 },
-  init2: { x: 500 },
-  ent: { x: 300 },
+  init: { x: '-100%' },
+  init2: { x: '100%' },
+  enter: { x: 0 },
 };
 
 const Title = ({ text, from }: TitleProps) => {
   return (
     <motion.div
-      // variants={variants}
-      // initial={from === 'left' ? 'init' : 'init2'}
-      // initial={'init'}
-      // animate="ent"
-      // initial={true}
-      // style={{ x: 100 }}
-      // animate={{ x: 300 }}
-      // transition={{ duration: 5 }}
+      variants={variants}
+      initial={from === 'left' ? 'init' : 'init2'}
+      animate="enter"
+      transition={{ duration: 1 }}
       className="text-center"
     >
       {text}

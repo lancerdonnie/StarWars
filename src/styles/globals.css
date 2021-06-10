@@ -1,7 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
-/* @import url('https://fonts.googleapis.com/css2?family=Londrina+Outline&family=Londrina+Sketch&family=Megrim&family=Press+Start+2P&display=swap'); */
-@import url('https://fonts.googleapis.com/css2?family=Megrim&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron&family=Megrim&family=Montserrat&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Material+Icons');
 
 @tailwind base;
@@ -14,9 +11,6 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  /* font-family: 'Londrina Outline', cursive; */
-  /* font-family: 'Press Start 2P', cursive; */
-  /* font-family: 'Londrina Sketch', cursive; */
   font-family: 'orbitron';
   background-color: black;
   overflow: hidden;
@@ -53,32 +47,6 @@ li {
 
 select {
   outline: none;
-}
-
-.logo div:first-child {
-  /* transform: translateX(-100vw); */
-  /* animation-name: left;
-  animation-duration: 1s;
-  animation-timing-function: ease-in;
-  animation-fill-mode: forwards; */
-}
-
-.logo div:last-child {
-  transform: translateX(100vw);
-  animation-name: right;
-  animation-duration: 1s;
-  animation-delay: 1s;
-  animation-timing-function: ease-in;
-  animation-fill-mode: forwards;
-}
-
-.choose {
-  opacity: 0;
-  animation-name: opac;
-  animation-duration: 0.7s;
-  animation-timing-function: ease-in;
-  animation-fill-mode: forwards;
-  animation-delay: 2.1s;
 }
 
 @media (max-width: 640px) {

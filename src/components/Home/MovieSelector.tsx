@@ -13,20 +13,19 @@ const MovieSelector = () => {
   const handleClick = () => setOptionsOpen(!isOptionsOpen);
 
   const { data, isLoading, error } = useQuery<Movie>(BASE_URL + 'films/', {
-    select: (data) => {
-      const x = { ...data };
-      x.results.sort(
+    select: ({ ...data }) => {
+      data.results.sort(
         (a, b) => +new Date(a.release_date) - +new Date(b.release_date)
       );
-      return x;
+      return data;
     },
-    enabled: false,
   });
 
   return (
     <motion.div
-      animate={{ bottom: 0 }}
-      className={`choose bottom-[-31px] absolute flex items-center`}
+      animate={{ bottom: 0, opacity: 1 }}
+      transition={{ delay: 1.1, duration: 0.5 }}
+      className={`bottom-[-31px] absolute opacity-0 flex items-center`}
     >
       <div
         onClick={handleClick}
