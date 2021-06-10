@@ -18,11 +18,6 @@ const queryClient = new QueryClient({
   },
 });
 
-const variants = {
-  initial: { y: '100%' },
-  animate: { y: 0 },
-};
-
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient} contextSharing>
